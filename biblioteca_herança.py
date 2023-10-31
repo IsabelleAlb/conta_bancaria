@@ -38,3 +38,10 @@ class Vaca(Animal):
         print(f"{self.nome} está mugindo")
 
 
+from biblioteca_herança import *
+gato1 = Gato("gordinho", "tricolor")
+gato1.emitirSom()
+gato1.comer()
+dog1 = Cachorro("cachorro", "branco")
+dog1.emitirSom()
+
