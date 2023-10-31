@@ -1,39 +1,41 @@
 class Banco:
-    def __init__(self, numero, saldo, nome, tipo, status, limite):
+    def __init__(self, numero, nome, tipo):
         self.numero = numero
-        self.saldo = saldo
+        self.saldo = 0
         self.nome = nome
         self.tipo = tipo
-        self.status = status
-        self.limite = limite
-
-    def depositar(self):
-        valor_dep = float(input("qual o valor de depósito? "))
-        total_dep = self.saldo + valor_dep
-        return total_dep
-
-
-    def sacar(self):
-        valor_saq = float(input("qual valor deseja sacar? "))
-        total_saq = self.saldo - valor_saq
-        return total_saq
+        self.status = False
+        self.limite = 0
 
     def ativarConta(self):
         if self.status == False:
-            pergunta = input("deseja ativar sua conta? s/n")
-            if pergunta == "sS":
-                self.status = True
-                print("conta ativa")
-            else:
-                print("conta inativa")
+            self.status = True
+            print("sua conta está ativa. você já pode movimentar")
+
         else:
-            pergunta = input("deseja desativar sua conta? s/n")
-            if pergunta == "sS":
-                self.status = False
-                print("conta inativa")
-            else:
-                print("conta ativa")
+            print("conta já está ativa")
+
+
+    def depositar(self, valor_dep):
+        if self.status == True:
+            self.saldo = self.saldo + valor_dep
+            print("Depósito efetuado com sucesso!")
+
+        else:
+            print("conta inativa")
+
+    def sacar(self, valor_saq):
+        if self.status == True:
+            self.saldo = self.saldo - valor_saq
+            print("saque efetuado com sucesso!")
+        else:
+            print("conta inativa")
+
 
     def verificarSaldo(self):
-        saldo_total = self.limite + (self.depositar() - self.sacar())
-        return saldo_total
+        if self.status == True:
+            print(f"seu saldo atual é R${self.saldo}")
+
+        else:
+            print("conta inativa")
+
