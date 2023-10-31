@@ -56,3 +56,13 @@ class Banco:
 
         else:
             print("conta inativa")
+
+
+from biblioteca_banco import Banco
+b1 = Banco(1028, "Isabelle", "corrente")
+b1.verificarSaldo()
+b1.ativarConta()
+b1.ativarConta()
+b1.depositar(100)
+b1.verificarSaldo()
+b1.ativarLimite(500)
