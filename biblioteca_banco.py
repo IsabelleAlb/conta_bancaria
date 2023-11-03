@@ -6,6 +6,7 @@ class Banco:
         self.status = False
         self.saldo = 0
         self.limite = 0
+        self.novo_limite = 0
 
 
     def ativarConta(self):
@@ -26,9 +27,10 @@ class Banco:
                 print("não foi possível desativar sua conta!"
                       " por favor verifique seu saldo")
 
+
     def ativarLimite(self, valor_limite):
         if self.status == True:
-            self.limite = self.limite + valor_limite
+            self.limite += valor_limite
 
         else:
             print("conta inativa")
@@ -36,15 +38,23 @@ class Banco:
 
     def depositar(self, valor_dep):
         if self.status == True:
-            self.saldo = self.saldo + valor_dep
+            self.saldo += valor_dep
             print("Depósito efetuado com sucesso!")
 
         else:
             print("conta inativa")
 
+
     def sacar(self, valor_saq):
         if self.status == True:
-            self.saldo = self.saldo - valor_saq
+            if valor_saq <= self.saldo:
+                self.saldo = self.saldo - valor_saq
+
+            elif valor_saq > self.saldo:
+                self.novo_limite = (self.limite + self.saldo) - valor_saq
+                self.limite = (self.limite - self.novo_limite) * (-1)
+                self.saldo = -1
+
             print("saque efetuado com sucesso!")
         else:
             print("conta inativa")
@@ -52,17 +62,10 @@ class Banco:
 
     def verificarSaldo(self):
         if self.status == True:
-            print(f"seu saldo atual é R${self.saldo}")
+            if self.saldo >= 0:
+                print(f"Seu saldo atual é R${self.saldo} e R${self.limite} de crédito especial")
+            else:
+                print(f"Seu saldo atual é R${self.limite} e você ainda possui R${self.novo_limite} de crédito especial")
 
         else:
             print("conta inativa")
-
-
-from biblioteca_banco import Banco
-b1 = Banco(1028, "Isabelle", "corrente")
-b1.verificarSaldo()
-b1.ativarConta()
-b1.ativarConta()
-b1.depositar(100)
-b1.verificarSaldo()
-b1.ativarLimite(500)
