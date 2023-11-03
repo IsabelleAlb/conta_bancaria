@@ -1,0 +1,11 @@
+from biblioteca_banco import Banco
+b1 = Banco(1028, "Isabelle", "corrente")
+b1.verificarSaldo()
+b1.ativarConta()
+b1.ativarConta()
+b1.depositar(300)
+b1.verificarSaldo()
+b1.ativarLimite(1000)
+b1.verificarSaldo()
+b1.sacar(400)
+b1.verificarSaldo()
